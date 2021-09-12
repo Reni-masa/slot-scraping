@@ -132,3 +132,5 @@ dmypy.json
 .venv/bin
 .venv/include
 .venv/lib
+
+.vscode
