@@ -13,6 +13,10 @@ class MysqlConnection(object):
     def __init__(self):
         MysqlConnection.mysql_connection()
 
+    def __del__(self):
+        MysqlConnection.mysql_cursor = None
+        MysqlConnection.mysql_conn = None
+
     @classmethod
     def mysql_connection(cls):
 

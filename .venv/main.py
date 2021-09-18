@@ -6,10 +6,9 @@ DEBUG = config.DEBUG
 
 
 def scraping_exe():
-    CHROME_DRIVER_PATH = config.CHROME_DRIVER_PATH
 
     try:
-        driver = webdriver.Chrome(executable_path=CHROME_DRIVER_PATH)
+        driver = webdriver.Chrome(executable_path=config.CHROME_DRIVER_PATH)
         driver.get("https://www.google.com/")
 
         time.sleep(5)
