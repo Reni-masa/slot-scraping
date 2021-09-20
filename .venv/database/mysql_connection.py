@@ -24,7 +24,8 @@ class MysqlConnection(object):
             return
 
         try:
-            if config.DEBUG:
+
+            if config.DEBUG == 'true':
                 conn = MySQLdb.connect(
                     user='root', passwd='root', host='localhost', db='slot_DB')
             else:
@@ -36,6 +37,7 @@ class MysqlConnection(object):
                     user=DB_USERNAME, passwd=DB_PASSWORD, host=DB_HOSTNAME, db=DB_NAME, charset="utf8")
 
             MysqlConnection.mysql_conn = conn
-            MysqlConnection.mysql_cursor = conn.cursor()
+            MysqlConnection.mysql_cursor = conn.cursor(
+                MySQLdb.cursors.DictCursor)
         except Exception as e:
             print("mysqlの接続に失敗しました。" + str(e))

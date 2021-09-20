@@ -1,20 +1,31 @@
 import config
 from selenium import webdriver
+# driver = webdriver.Chrome(executable_path=config.CHROME_DRIVER_PATH)
 import time
+from database.slot_information import SlotInformation
 
-DEBUG = config.DEBUG
+from Function import Function
 
 
 def scraping_exe():
 
     try:
-        driver = webdriver.Chrome(executable_path=config.CHROME_DRIVER_PATH)
-        driver.get("https://www.google.com/")
 
-        time.sleep(5)
+        # スクレイピング先を取得
+        slotInformation = SlotInformation()
+        slot_infos = slotInformation.getAll()
+
+        for slot_info in slot_infos:
+
+            search_url = slot_info["search_url"]
+
+            time.sleep(2)
+
+            topPagehtmlElements = Function.getAllElements(search_url)
+            machineUrlList = Function.getMachineUrlList(topPagehtmlElements)
+
     except Exception as e:
-        print('ページアクセス時に例外が発生しました。' + str(e))
-    driver.quit()
+        print('[scraping_exe]失敗しました。' + str(e))
 
 
 scraping_exe()
