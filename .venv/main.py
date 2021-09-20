@@ -11,7 +11,7 @@ def scraping_exe():
 
     try:
 
-        # スクレイピング先を取得
+        # マスタ機種情報を取得
         slotInformation = SlotInformation()
         slot_infos = slotInformation.getAll()
 
@@ -21,11 +21,24 @@ def scraping_exe():
 
             time.sleep(2)
 
-            topPagehtmlElements = Function.getAllElements(search_url)
-            machineUrlList = Function.getMachineUrlList(topPagehtmlElements)
+            topPageHtmlElements = Function.getAllElements(search_url)
+            machineUrlList = Function.getMachineUrlList(topPageHtmlElements)
 
+            for machineUrl in machineUrlList:
+                dataPageHtmlElements = Function.getAllElements(machineUrl)
+                # 登録データを取得
+                bonusDataDict = Function.getBonusData(dataPageHtmlElements)
+
+        # デバッグここから
+        # dataPageHtmlElements = Function.getAllElements(
+        #     "https://store.p-ken.jp/p-kingkankosakaewakamiya/bonus/details/745/2/0/")
+
+        # bonusDataDict = Function.getBonusData(dataPageHtmlElements)
+        # print(bonusDataDict)
+
+        # ここまで
     except Exception as e:
-        print('[scraping_exe]失敗しました。' + str(e))
+        print('[heroku][slot_scraping][scraping_exe]失敗しました。' + str(e))
 
 
 scraping_exe()
