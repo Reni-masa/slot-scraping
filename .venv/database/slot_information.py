@@ -1,4 +1,4 @@
-from .mysql_connection import MysqlConnection
+from .Mysql_connection import MysqlConnection
 
 
 class SlotInformation(MysqlConnection):
@@ -6,7 +6,7 @@ class SlotInformation(MysqlConnection):
     def getAll(self):
         try:
             cursor = MysqlConnection.mysql_cursor
-            sql = 'SELECT * FROM slot_information ORDER BY id;'
+            sql = 'SELECT * FROM slot_information WHERE enabled = 1 ORDER BY id;'
             cursor.execute(sql)
 
             return cursor.fetchall()
