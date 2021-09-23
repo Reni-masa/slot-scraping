@@ -80,6 +80,7 @@ class Function(object):
     @staticmethod
     def setting_judgement(slot_info: dict, gameData: dict):
         try:
+            max_total_guss_value = 0
             # 設定1~6までの推定確率を計算
             for i in range(1, 7):
 
@@ -100,6 +101,11 @@ class Function(object):
                     (float(total_guss_value) / 2.355) * 100)
 
                 gameData["guess_class" + str(i)] = total_guss_value
+
+                # 一番確率の高い設定を保持
+                if float(total_guss_value) > float(max_total_guss_value):
+                    max_total_guss_value = total_guss_value
+                    gameData["class"] = i
 
             return gameData
         except Exception as e:
