@@ -62,40 +62,11 @@ def scraping_exe():
                 # 設定判別
                 bonusDataDict = Function.setting_judgement(
                     slot_info, bonusDataDict)
-                print(bonusDataDict)
+
                 # データベース登録
                 slotGameData = SlotGameData()
                 slotGameData.insertSlotGameData(slot_info["id"], bonusDataDict)
 
-        # デバッグここから
-        # slot_info = slot_infos[0]
-
-        # dataPageHtmlElements = Function.getAllElements(
-        #     "https://store.p-ken.jp/p-kingkankosakaewakamiya/bonus/details/751/2/0/")
-
-        # bonusDataDict = {
-        #     "id": None,
-        #     "BB": 0,
-        #     "RB": 0,
-        #     "BB_ave": 0,
-        #     "RB_ave": 0,
-        #     "total_game": 0,
-        #     "total_ave": 0,
-        #     "guess_class1": 0,
-        #     "guess_class2": 0,
-        #     "guess_class3": 0,
-        #     "guess_class4": 0,
-        #     "guess_class5": 0,
-        #     "guess_class6": 0,
-        # }
-        # bonusDataDict = Function.getBonusData(
-        #     dataPageHtmlElements, bonusDataDict)
-
-        # # 設定判別
-        # bonusDataDict = Function.setting_judgement(
-        #     slot_info, bonusDataDict)
-
-        # ここまで
     except Exception as e:
         print('[heroku][slot_scraping][scraping_exe]失敗しました。' + str(e))
 

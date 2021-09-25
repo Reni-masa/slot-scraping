@@ -81,6 +81,7 @@ class Function(object):
     def setting_judgement(slot_info: dict, gameData: dict):
         try:
             max_total_guss_value = 0
+            max_total_guss_value_len = 0
             # 設定1~6までの推定確率を計算
             for i in range(1, 7):
 
@@ -106,6 +107,30 @@ class Function(object):
                 if float(total_guss_value) > float(max_total_guss_value):
                     max_total_guss_value = total_guss_value
                     gameData["class"] = i
+
+                # 推定確率の桁数調整のため、最大桁数を保持する。
+                decimal_point = total_guss_value.find('.')
+                if decimal_point != -1:
+                    total_guss_value_len = len(
+                        str(total_guss_value[:decimal_point]))
+
+                if int(total_guss_value_len) > int(max_total_guss_value_len):
+                    max_total_guss_value_len = total_guss_value_len
+
+            # 桁数が大きすぎることがあるので保持してた最大桁数をもとに桁数を調整する
+            if max_total_guss_value_len == 3:
+                for i in range(1, 7):
+                    guess_class_value = float(
+                        gameData["guess_class" + str(i)]) / 10
+                    gameData["guess_class" +
+                             str(i)] = '{:.2f}'.format(guess_class_value)
+
+            elif max_total_guss_value_len == 4:
+                for i in range(1, 7):
+                    guess_class_value = float(
+                        gameData["guess_class" + str(i)]) / 100
+                    gameData["guess_class" +
+                             str(i)] = '{:.2f}'.format(guess_class_value)
 
             return gameData
         except Exception as e:
