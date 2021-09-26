@@ -1,12 +1,12 @@
-import config
-from selenium import webdriver
-# driver = webdriver.Chrome(executable_path=config.CHROME_DRIVER_PATH)
-import time
-from database.Slot_information import SlotInformation
-from database.Slot_game_data import SlotGameData
-
-from Function import Function
 import datetime
+from Function import Function
+from database.Slot_game_data import SlotGameData
+from database.Slot_information import SlotInformation
+import time
+from selenium import webdriver
+import config
+
+# driver = webdriver.Chrome(executable_path=config.CHROME_DRIVER_PATH)
 
 
 def scraping_exe():
