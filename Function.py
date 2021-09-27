@@ -61,7 +61,7 @@ class Function(object):
             total_ave = bonusContents.select_one("div.total_hit_rate").text
             total_ave = total_ave.replace(" ", "")
             total_ave = total_ave.replace("\n", "")
-            bonusDataDict["total_ave"] = datalist[7]
+            bonusDataDict["total_ave"] = total_ave
 
             # 累計取得
             elements = bonusContents.select("div.s12 > div.row > div")[2]
